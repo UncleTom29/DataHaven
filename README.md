@@ -11,6 +11,10 @@ DataHaven enables users on any blockchain (Ethereum, Solana, Sui) to securely st
 
 🔗 **[Demo]()** • 📚 **[Pitch](https://docs.google.com/presentation/d/1au-rc8LnN8E1ES53H930WJsU-8kdQUxmuHX1QkpgxS8/edit?usp=sharing)** • 🌐 **[Website](https://datahaven.vercel.app)**
 
+- Sui Testnet Deployment:  https://suiscan.xyz/testnet/object/0x3b27c207fcac0f39646010314460ce306cfd1602a023a179e0fa3b1db00bb485/contracts
+- Solana Devnet Deployment: https://solscan.io/account/GRLdEPx7n4g2kowPvfPrPWpToeap3sHbKSDe18bCLyU5?cluster=devnet
+- Sepolia Deployment: https://sepolia.etherscan.io/address/0x2a539aE52d86C63052cD19ADd268D83Cf76f5B07#code
+
 ---
 
 ## 🌟 Features
