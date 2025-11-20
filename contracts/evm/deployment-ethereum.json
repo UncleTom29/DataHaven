@@ -1,0 +1,7 @@
+{
+  "network": "sepolia",
+  "contract": "0x2a539aE52d86C63052cD19ADd268D83Cf76f5B07",
+  "relayer": "0xaa090665def73929e1bf0dd06f3e6896bec2c699",
+  "deployer": "0xAa090665dEF73929E1BF0dd06f3E6896beC2C699",
+  "timestamp": "2025-11-18T18:02:27.547Z"
+}
