@@ -1,0 +1,13 @@
+[package]
+name = "solana"
+version = "0.1.0"
+edition = "2021"
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "solana"
+[features]
+idl-build = ["anchor-lang/idl-build"]
+[dependencies]
+anchor-lang = "0.30.0"
+[profile.release]
+overflow-checks = true
