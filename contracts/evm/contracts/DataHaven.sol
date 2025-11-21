@@ -1,6 +1,8 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
+import "@openzeppelin/contracts/utils/cryptography/ECDSA.sol"; 
+
 contract DataHaven {
     address public admin;
     address public relayer;
@@ -14,6 +16,9 @@ contract DataHaven {
     struct Request {
         address user;
         bytes32 dataHash;
+        bytes32 blobId; 
+        bytes32 suiTxHash; 
+        bytes32 proofHash; 
         Status status;
         uint256 payment;
         uint256 timestamp;
@@ -29,7 +34,12 @@ contract DataHaven {
         uint256 timestamp
     );
 
-    event StorageConfirmed(bytes32 indexed requestId);
+    event StorageConfirmed(
+        bytes32 indexed requestId,
+        bytes32 blobId,
+        bytes32 suiTxHash,
+        bytes32 proofHash
+    );
     event RequestFailed(bytes32 indexed requestId);
     event AccessRevoked(bytes32 indexed requestId);
 
@@ -68,6 +78,9 @@ contract DataHaven {
         requests[requestId] = Request({
             user: msg.sender,
             dataHash: _dataHash,
+            blobId: bytes32(0),
+            suiTxHash: bytes32(0),
+            proofHash: bytes32(0),
             status: Status.Pending,
             payment: msg.value,
             timestamp: block.timestamp
@@ -77,11 +90,32 @@ contract DataHaven {
         return requestId;
     }
 
-    function confirmStorage(bytes32 _requestId) external onlyRelayer {
-        require(requests[_requestId].status == Status.Pending, "Invalid status");
-        requests[_requestId].status = Status.Confirmed;
-        emit StorageConfirmed(_requestId);
-    }
+    // New: Replaces confirmStorage for workflow step 4
+        function verifyReceipt(
+            bytes32 _requestId,
+            bytes32 _blobId,
+            bytes32 _suiTxHash,
+            bytes32 _proofHash,
+            bytes memory _signature
+        ) external {
+            Request storage req = requests[_requestId];
+            require(req.status == Status.Pending, "Invalid status");
+    
+            // Verify signature from relayer
+            bytes32 messageHash = keccak256(abi.encodePacked(_requestId, _blobId, _suiTxHash, _proofHash));
+            // Manually compute the Ethereum Signed Message hash since toEthSignedMessageHash isn't available
+            bytes32 ethSignedMessageHash = keccak256(abi.encodePacked("\x19Ethereum Signed Message:\n32", messageHash));
+            address signer = ECDSA.recover(ethSignedMessageHash, _signature);
+            require(signer == relayer, "Invalid signature");
+    
+            // Update request
+            req.blobId = _blobId;
+            req.suiTxHash = _suiTxHash;
+            req.proofHash = _proofHash;
+            req.status = Status.Confirmed;
+    
+            emit StorageConfirmed(_requestId, _blobId, _suiTxHash, _proofHash);
+        }
 
     function markFailed(bytes32 _requestId) external onlyRelayer {
         Request storage req = requests[_requestId];
@@ -109,4 +143,3 @@ contract DataHaven {
     
     receive() external payable {}
 }
-

@@ -9,11 +9,11 @@
 
 DataHaven enables users on any blockchain (Ethereum, Solana, Sui) to securely store encrypted data on Walrus with zero-knowledge privacy guarantees, all without leaving their native chain.
 
-🔗 **[Demo]()** • 📚 **[Pitch](https://docs.google.com/presentation/d/1au-rc8LnN8E1ES53H930WJsU-8kdQUxmuHX1QkpgxS8/edit?usp=sharing)** • 🌐 **[Website](https://datahaven.vercel.app)**
+🔗 **[Demo]()** • 📚 **[Pitch](https://docs.google.com/presentation/d/1au-rc8LnN8E1ES53H930WJsU-8kdQUxmuHX1QkpgxS8/edit?usp=sharing)** • 🌐 **[Website](https://datahavenx.vercel.app)**
 
-- Sui Testnet Deployment:  https://suiscan.xyz/testnet/object/0x3b27c207fcac0f39646010314460ce306cfd1602a023a179e0fa3b1db00bb485/contracts
+- Sui Testnet Deployment:  https://suiscan.xyz/testnet/object/0x73720e94512eae73fe7d0f4f2515496a9c38a75eff625b5f41e65f5850f3651f/contracts
 - Solana Devnet Deployment: https://solscan.io/account/GRLdEPx7n4g2kowPvfPrPWpToeap3sHbKSDe18bCLyU5?cluster=devnet
-- Sepolia Deployment: https://sepolia.etherscan.io/address/0x2a539aE52d86C63052cD19ADd268D83Cf76f5B07#code
+- Sepolia Deployment: https://sepolia.etherscan.io/address/0x44BD38022E8626673cd917CA91cc8075a52E2090#code
 
 ---
 
